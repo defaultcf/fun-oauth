@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= t('doorkeeper.layouts.admin.title') %></title>
+  <%= javascript_include_tag "application" %>
   <%= stylesheet_link_tag "doorkeeper/admin/application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -12,7 +13,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
   <%= link_to t('doorkeeper.layouts.admin.nav.oauth2_provider'), oauth_applications_path, class: 'navbar-brand' %>
 
-  <div class="collapse navbar-collapse">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggler" aria-controls="navbar-toggler" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbar-toggler">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item <%= 'active' if request.path == oauth_applications_path %>">
         <%= link_to t('doorkeeper.layouts.admin.nav.applications'), oauth_applications_path, class: 'nav-link' %>
@@ -23,6 +28,18 @@
         </li>
       <% end %>
     </ul>
+    <% if user_signed_in? %>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="user-button" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+          <%= current_user.email %>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="user-button">
+          <a class="dropdown-item" href="/users/edit">Edit</a>
+          <a class="dropdown-item" href="/users/logout">Logout</a>
+        </div>
+      </div>
+  <% else %>
+  <% end %>
   </div>
 </nav>
 
