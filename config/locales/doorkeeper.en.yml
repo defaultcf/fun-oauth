@@ -129,9 +129,9 @@ en:
 
     layouts:
       admin:
-        title: 'Doorkeeper'
+        title: 'FUN OAuth'
         nav:
-          oauth2_provider: 'OAuth2 Provider'
+          oauth2_provider: 'OAuth2 Provider for FUN'
           applications: 'Applications'
           home: 'Home'
       application:
