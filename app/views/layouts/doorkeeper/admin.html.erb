@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= t('doorkeeper.layouts.admin.title') %></title>
   <%= javascript_include_tag "application" %>
-  <%= stylesheet_link_tag "doorkeeper/admin/application" %>
+  <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="d-flex flex-column">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
   <%= link_to t('doorkeeper.layouts.admin.nav.oauth2_provider'), oauth_applications_path, class: 'navbar-brand' %>
 
@@ -29,28 +29,37 @@
       <% end %>
     </ul>
     <% if user_signed_in? %>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="user-button" data-toggle="dropdown" aria-haspopup="true" aria-expand="false">
+      <div class="btn-group">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= current_user.email %>
         </button>
-        <div class="dropdown-menu" aria-labelledby="user-button">
+        <div class="dropdown-menu">
           <a class="dropdown-item" href="/users/edit">Edit</a>
           <a class="dropdown-item" href="/users/logout">Logout</a>
         </div>
       </div>
-  <% else %>
-  <% end %>
+    <% else %>
+      <a class="btn btn-secondary" type="button" href="/users/sign_in">Login</a>
+    <% end %>
   </div>
 </nav>
 
-<div class="doorkeeper-admin container">
-  <%- if flash[:notice].present? %>
-    <div class="alert alert-info">
-      <%= flash[:notice] %>
-    </div>
-  <% end -%>
+<div class="flex-shrink-0">
+  <div class="doorkeeper-admin container">
+    <%- if flash[:notice].present? %>
+      <div class="alert alert-info">
+        <%= flash[:notice] %>
+      </div>
+    <% end -%>
 
-  <%= yield %>
+    <%= yield %>
+  </div>
 </div>
+
+<footer class="footer mt-auto py-3">
+  <div class="container">
+    Help us develop at <a href="https://github.com/i544c/fun-oauth" target="_blank">i544c/fun-oauth</a>
+  </div>
+</footer>
 </body>
 </html>

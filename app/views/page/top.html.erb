@@ -1,2 +1,11 @@
-<h1>Page#top</h1>
-<p>Find me in app/views/page/top.html.erb</p>
+<h3>未来大生のためのOAuthプロバイダサービス</h3>
+
+<p>このサービスを介して認証を行うことで、ユーザが未来大生であることを保証できます！</p>
+
+<p>いずれの用途で使う場合も、まずはアカウントを作りましょう！</p>
+
+<% if user_signed_in? %>
+  <button class="btn btn-secondary" disabled>ログイン済み</button>
+<% else %>
+  <a class="btn btn-primary" type="button" href="/users/sign_up">アカウント作成</a>
+<% end %>
