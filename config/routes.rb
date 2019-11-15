@@ -10,5 +10,11 @@ Rails.application.routes.draw do
     controllers applications: 'oauth/applications'
   end
 
+  namespace :api do
+    namespace :v1 do
+      get 'credentials/me'
+    end
+  end
+
   root to: 'page#top'
 end
